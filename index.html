@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jardín | Salón de Eventos - Semana Completa 15:00 a 23:00 hrs</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        jardin: {
+                            50: '#f4f9f6',
+                            100: '#e2f1e8',
+                            200: '#c6e2d3',
+                            500: '#2d6a4f',
+                            600: '#1b4332',
+                            700: '#143627',
+                            800: '#0f291e',
+                            900: '#091c14',
+                        },
+                        gold: {
+                            100: '#fbf5e6',
+                            200: '#f5e6c4',
+                            400: '#d4af37',
+                            500: '#c59b27',
+                            600: '#a37e1b',
+                        },
+                        cream: '#FAF8F5'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF8F5;
+            color: #1c2826;
+        }
+        h1, h2, h3, .font-editorial {
+            font-family: 'Playfair Display', serif;
+        }
+        .glass-nav {
+            background: rgba(250, 248, 245, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-overlay {
+            background: linear-gradient(
+                180deg,
+                rgba(9, 28, 20, 0.65) 0%,
+                rgba(20, 54, 39, 0.48) 45%,
+                rgba(9, 28, 20, 0.88) 100%
+            );
+        }
+        .card-hover {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px -10px rgba(20, 54, 39, 0.18);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF8F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d6a4f;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-jardin-600 selection:text-white">
+
+    <!-- INPUT OCULTO PARA VINCULAR LAS 34 FOTOS REALES DESDE LA PC -->
+    <input type="file" id="local-photos-input" multiple accept="image/*" class="hidden" onchange="procesarFotosLocales(event)">
+
+    <!-- NOTIFICACIÓN FLOTANTE (SIN ALERT) -->
+    <div id="toast-notification" class="fixed bottom-6 right-6 z-50 hidden transform transition-all duration-300 translate-y-4 opacity-0">
+        <div class="bg-jardin-800 text-white px-5 py-4 rounded-2xl shadow-2xl border border-gold-400/40 flex items-center gap-3 max-w-sm">
+            <div class="w-9 h-9 rounded-full bg-gold-500/20 text-gold-400 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div>
+                <p id="toast-title" class="font-semibold text-sm">¡Listo!</p>
+                <p id="toast-message" class="text-xs text-gray-300 mt-0.5">Acción completada con éxito.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         1. BARRA DE NAVEGACIÓN
+    ====================================================================== -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-nav border-b border-jardin-200/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#inicio" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-2xl bg-jardin-700 text-gold-400 flex items-center justify-center shadow-md group-hover:bg-jardin-600 transition">
+                        <i class="fa-solid fa-leaf text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl font-bold tracking-tight text-jardin-800 block leading-none">Jardín</span>
+                        <span class="text-[11px] uppercase tracking-[0.2em] text-gold-600 font-semibold block mt-1">Salón de Eventos</span>
+                    </div>
+                </a>
+
+                <!-- Enlaces Desktop -->
+                <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-700">
+                    <a href="#inicio" class="hover:text-jardin-600 transition">Inicio</a>
+                    <a href="#galeria" class="hover:text-jardin-600 transition font-semibold text-jardin-700">Galería por Áreas (34)</a>
+                    <a href="#servicios" class="hover:text-jardin-600 transition">Instalaciones</a>
+                    <a href="#horarios-ubicacion" class="hover:text-jardin-600 transition">Horarios y Mapa</a>
+                </nav>
+
+                <!-- Botones de Acción Desktop -->
+                <div class="hidden sm:flex items-center gap-2.5">
+                    <button onclick="document.getElementById('local-photos-input').click()" title="Selecciona tus 34 fotos desde tu carpeta para verlas en vivo" class="px-3.5 py-2.5 rounded-xl bg-gold-100 hover:bg-gold-200 text-jardin-900 border border-gold-400/50 text-xs font-bold flex items-center gap-2 transition shadow-sm">
+                        <i class="fa-solid fa-folder-open text-gold-600"></i>
+                        <span id="btn-cargar-texto">Cargar mis 34 Fotos</span>
+                    </button>
+                    <button onclick="toggleConfigModal()" class="px-3.5 py-2.5 rounded-xl border border-jardin-200 text-jardin-700 hover:bg-jardin-50 text-xs font-semibold flex items-center gap-1.5 transition">
+                        <i class="fa-solid fa-sliders text-gold-600"></i>
+                        <span>Datos</span>
+                    </button>
+                    <a href="#cotizar" class="px-4 py-2.5 rounded-xl bg-jardin-700 hover:bg-jardin-600 text-white font-semibold text-xs sm:text-sm shadow-md hover:shadow-lg transition flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-gold-400 text-base"></i>
+                        <span>Cotizar</span>
+                    </a>
+                </div>
+
+                <!-- Botón Menú Móvil -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden p-3 rounded-xl text-jardin-800 hover:bg-jardin-100 focus:outline-none" aria-label="Abrir menú">
+                    <i id="mobile-menu-icon" class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú Móvil -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-cream border-b border-jardin-200 px-4 pt-3 pb-6 space-y-2 shadow-xl">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-gray-800 hover:bg-jardin-100 font-medium">Inicio</a>
+            <a href="#galeria" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-jardin-800 bg-jardin-50 font-bold">Galería por Categorías (34 Fotos)</a>
+            <a href="#servicios" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-gray-800 hover:bg-jardin-100 font-medium">Instalaciones y Servicios</a>
+            <a href="#horarios-ubicacion" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-gray-800 hover:bg-jardin-100 font-medium">Horarios y Mapa</a>
+            <div class="pt-3 flex flex-col gap-2.5 border-t border-jardin-200/70">
+                <button onclick="toggleMobileMenu(); document.getElementById('local-photos-input').click();" class="w-full py-2.5 px-4 rounded-xl bg-gold-100 border border-gold-400 text-jardin-900 font-bold text-sm flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-folder-open text-gold-600"></i> Cargar mis 34 Fotos desde mi PC
+                </button>
+                <button onclick="toggleMobileMenu(); toggleConfigModal();" class="w-full py-2.5 px-4 rounded-xl border border-jardin-600 text-jardin-700 font-semibold text-sm flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-sliders"></i> Personalizar Teléfono y Propietario
+                </button>
+                <a href="#cotizar" onclick="toggleMobileMenu()" class="w-full py-3 px-4 rounded-xl bg-jardin-700 text-white font-semibold text-center text-sm shadow-md">
+                    Agendar Visita / Cotizar
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- =====================================================================
+         2. SECCIÓN HERO CON FOTO DE ARREGLOS DE MESAS (Portada.jpeg)
+            Y SELECTOR DE FONDOS POR CATEGORÍA
+    ====================================================================== -->
+    <section id="inicio" class="relative min-h-[94vh] pt-28 pb-16 flex items-center justify-center overflow-hidden">
+        <!-- Imagen de Fondo Dinámica (Inicia con Portada.jpeg donde mejor lucen los arreglos en las mesas) -->
+        <img 
+            id="hero-bg-img"
+            src="Portada.jpeg" 
+            data-filename="Portada.jpeg"
+            data-fallback="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1920&q=85"
+            onerror="manejarErrorImagen(this)"
+            alt="Arreglos florales en mesas del Salón de Eventos Jardín" 
+            class="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 scale-105"
+        >
+        <div class="absolute inset-0 hero-overlay"></div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white my-auto">
+            <!-- Insignia de Horario Semana Completa -->
+            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-black/35 backdrop-blur-md border border-gold-400/50 text-gold-200 text-xs sm:text-sm font-medium mb-6 shadow-lg">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Horario Semana Completa: Lunes a Domingo • <strong>15:00 a 23:00 hrs</strong></span>
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-4">
+                Salón de Eventos <span class="text-gold-400 italic font-normal">Jardín</span>
+            </h1>
+
+            <p id="hero-subtitle" class="max-w-2xl mx-auto text-base sm:text-xl text-gray-100 font-light leading-relaxed mb-8">
+                Elegancia en cada detalle: arreglos de mesa de gala, amplia área techada, jardín al aire libre, zona de inflable y columpios, cocina equipada y sanitarios impecables.
+            </p>
+
+            <!-- SELECTOR DE FONDOS INTERACTIVO POR ÁREA DEL SALÓN -->
+            <div class="max-w-4xl mx-auto mb-9 bg-black/40 backdrop-blur-md p-3 sm:p-4 rounded-3xl border border-white/20 shadow-2xl">
+                <p class="text-[11px] uppercase tracking-[0.2em] text-gold-400 font-bold mb-3">
+                    <i class="fa-solid fa-camera-retro mr-1"></i> Haz clic en un área para cambiar la foto de fondo y filtrar la galería:
+                </p>
+                <div class="flex flex-wrap justify-center gap-2">
+                    <button onclick="cambiarFondoHero('techada')" id="hero-btn-techada" class="hero-cat-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-gold-500 text-jardin-900 shadow-md transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-champagne-glasses"></i> Parte Techada y Arreglos de Mesas
+                    </button>
+                    <button onclick="cambiarFondoHero('aire-libre')" id="hero-btn-aire-libre" class="hero-cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/15 hover:bg-white/25 text-white transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-sun"></i> Al Aire Libre (Sin Techar)
+                    </button>
+                    <button onclick="cambiarFondoHero('juegos')" id="hero-btn-juegos" class="hero-cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/15 hover:bg-white/25 text-white transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-children"></i> Inflable, Columpios y Futbolito
+                    </button>
+                    <button onclick="cambiarFondoHero('dulces')" id="hero-btn-dulces" class="hero-cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/15 hover:bg-white/25 text-white transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-candy-cane"></i> Mesa de Dulces y Botanas
+                    </button>
+                    <button onclick="cambiarFondoHero('cocina')" id="hero-btn-cocina" class="hero-cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/15 hover:bg-white/25 text-white transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-utensils"></i> Cocina Pequeña y Barra
+                    </button>
+                    <button onclick="cambiarFondoHero('banos')" id="hero-btn-banos" class="hero-cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/15 hover:bg-white/25 text-white transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-restroom"></i> Baños y Entrada
+                    </button>
+                </div>
+            </div>
+
+            <!-- Botones de Acción (CTAs) -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#galeria" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gold-500 hover:bg-gold-400 text-jardin-900 font-bold text-base shadow-xl transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2.5">
+                    <i class="fa-regular fa-images text-lg"></i>
+                    <span>Explorar las 34 Fotografías</span>
+                </a>
+                <a href="#cotizar" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/30 text-white font-semibold text-base transition flex items-center justify-center gap-2.5">
+                    <i class="fa-brands fa-whatsapp text-emerald-400 text-xl"></i>
+                    <span>Cotizar Evento (15 a 23 hrs)</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         3. GALERÍA INTERACTIVA POR CATEGORÍAS (LAS 34 FOTOS DEL SALÓN)
+    ====================================================================== -->
+    <section id="galeria" class="py-20 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Banner de ayuda rápida para vincular fotos locales si están en otra carpeta -->
+        <div id="local-loader-banner" class="mb-10 bg-jardin-800 text-white rounded-3xl p-5 sm:p-6 shadow-lg border border-gold-400/30 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-start sm:items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-2xl shrink-0">
+                    <i class="fa-solid fa-images"></i>
+                </div>
+                <div>
+                    <h3 class="text-base sm:text-lg font-bold text-white">¿Quieres ver tus 34 fotos cargadas directamente desde tu carpeta?</h3>
+                    <p class="text-xs sm:text-sm text-gray-300 mt-0.5">
+                        Si abriste el código en la vista previa o tus fotos están en otra carpeta de tu PC, haz clic en el botón para seleccionar las 34 imágenes (`1.jpeg` a `32.jpeg`, `Portada.jpeg` y `Entrada.jpeg`) y se mostrarán al instante.
+                    </p>
+                </div>
+            </div>
+            <button onclick="document.getElementById('local-photos-input').click()" class="w-full md:w-auto shrink-0 px-5 py-3 rounded-2xl bg-gold-500 hover:bg-gold-400 text-jardin-900 font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Seleccionar mis 34 Fotos</span>
+            </button>
+        </div>
+
+        <div class="text-center max-w-3xl mx-auto mb-10">
+            <span class="text-xs font-bold uppercase tracking-[0.2em] text-jardin-500 bg-jardin-100 px-3.5 py-1.5 rounded-full">Recorrido Fotográfico Real</span>
+            <h2 class="text-3xl sm:text-5xl font-bold text-jardin-800 mt-4">Conoce cada área de Salón Jardín</h2>
+            <p class="text-gray-600 mt-3 text-base">
+                Selecciona la categoría que deseas explorar. Al elegir una categoría, también puedes usar cualquiera de sus fotos como fondo principal.
+            </p>
+        </div>
+
+        <!-- Botones de Categoría con Contador -->
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10">
+            <button onclick="filtrarGaleria('todos')" id="filter-todos" class="gallery-filter-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold bg-jardin-700 text-white shadow-md transition flex items-center gap-2">
+                <i class="fa-solid fa-border-all"></i>
+                <span>Todas las Fotos (34)</span>
+            </button>
+            <button onclick="filtrarGaleria('techada')" id="filter-techada" class="gallery-filter-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold bg-white text-gray-700 hover:bg-jardin-100 border border-jardin-200 transition flex items-center gap-2">
+                <i class="fa-solid fa-champagne-glasses text-gold-600"></i>
+                <span>Parte Techada y Arreglos de Mesas (18)</span>
+            </button>
+            <button onclick="filtrarGaleria('aire-libre')" id="filter-aire-libre" class="gallery-filter-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold bg-white text-gray-700 hover:bg-jardin-100 border border-jardin-200 transition flex items-center gap-2">
+                <i class="fa-solid fa-sun text-amber-500"></i>
+                <span>Al Aire Libre / Sin Techar (5)</span>
+            </button>
+            <button onclick="filtrarGaleria('juegos')" id="filter-juegos" class="gallery-filter-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold bg-white text-gray-700 hover:bg-jardin-100 border border-jardin-200 transition flex items-center gap-2">
+                <i class="fa-solid fa-children text-emerald-600"></i>
+                <span>Área de Inflable y Columpios (4)</span>
+            </button>
+            <button onclick="filtrarGaleria('dulces')" id="filter-dulces" class="gallery-filter-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold bg-white text-gray-700 hover:bg-jardin-100 border border-jardin-200 transition flex items-center gap-2">
+                <i class="fa-solid fa-candy-cane text-rose-500"></i>
+                <span>Mesa de Dulces y Botanas (3)</span>
+            </button>
+            <button onclick="filtrarGaleria('cocina')" id="filter-cocina" class="gallery-filter-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold bg-white text-gray-700 hover:bg-jardin-100 border border-jardin-200 transition flex items-center gap-2">
+                <i class="fa-solid fa-utensils text-gold-600"></i>
+                <span>Cocina Pequeña y Barra (2)</span>
+            </button>
+            <button onclick="filtrarGaleria('banos')" id="filter-banos" class="gallery-filter-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold bg-white text-gray-700 hover:bg-jardin-100 border border-jardin-200 transition flex items-center gap-2">
+                <i class="fa-solid fa-restroom text-jardin-600"></i>
+                <span>Baños y Entrada (3)</span>
+            </button>
+        </div>
+
+        <!-- Cuadrícula de las 34 Imágenes -->
+        <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Renderizado dinámico por JS -->
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         4. RESUMEN DE ÁREAS DEL SALÓN
+    ====================================================================== -->
+    <section id="servicios" class="py-20 bg-jardin-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-xs font-bold uppercase tracking-[0.2em] text-gold-400">Equipamiento Completo</span>
+                <h2 class="text-3xl sm:text-5xl font-bold mt-3">Todo incluido para tu comodidad</h2>
+                <p class="text-gray-300 mt-3 text-base">
+                    Disfruta de 8 horas continuas de evento (15:00 a 23:00 hrs) cualquier día de la semana con todas nuestras áreas listas.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div onclick="cambiarFondoHero('techada'); document.getElementById('galeria').scrollIntoView({behavior:'smooth'});" class="cursor-pointer bg-jardin-700/70 hover:bg-jardin-700 p-7 rounded-3xl border border-white/10 transition">
+                    <div class="w-12 h-12 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-champagne-glasses"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Salón Techado y Mesas de Gala</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Amplia zona techada con series de luces, sillas Tiffany blancas, mesas vestidas con arreglos florales, mesa de honor con cortinaje y pared 3D.
+                    </p>
+                </div>
+
+                <div onclick="cambiarFondoHero('aire-libre'); document.getElementById('galeria').scrollIntoView({behavior:'smooth'});" class="cursor-pointer bg-jardin-700/70 hover:bg-jardin-700 p-7 rounded-3xl border border-white/10 transition">
+                    <div class="w-12 h-12 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-couch"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Patio al Aire Libre y Sala Lounge</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Zona exterior adoquinada sin techar rodeada de muros verdes naturales, jardineras y sala lounge modular blanca con mesas centrales.
+                    </p>
+                </div>
+
+                <div onclick="cambiarFondoHero('juegos'); document.getElementById('galeria').scrollIntoView({behavior:'smooth'});" class="cursor-pointer bg-jardin-700/70 hover:bg-jardin-700 p-7 rounded-3xl border border-white/10 transition">
+                    <div class="w-12 h-12 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-children"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Inflable, Columpios y Futbolito</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Diversión garantizada con castillo inflable de doble resbaladilla, dos módulos de columpios, casita escaladora, futbolito y mesitas infantiles.
+                    </p>
+                </div>
+
+                <div onclick="cambiarFondoHero('cocina'); document.getElementById('galeria').scrollIntoView({behavior:'smooth'});" class="cursor-pointer bg-jardin-700/70 hover:bg-jardin-700 p-7 rounded-3xl border border-white/10 transition">
+                    <div class="w-12 h-12 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Cocina Pequeña y Barra</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Equipada con barra revestida en piedra, tarja de acero inoxidable, parrilla de quemadores, refrigerador y enfriador de bebidas.
+                    </p>
+                </div>
+
+                <div onclick="cambiarFondoHero('dulces'); document.getElementById('galeria').scrollIntoView({behavior:'smooth'});" class="cursor-pointer bg-jardin-700/70 hover:bg-jardin-700 p-7 rounded-3xl border border-white/10 transition">
+                    <div class="w-12 h-12 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-candy-cane"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Área de Dulces y Botanas</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Espacio ideal para montar exhibidor en escalera, carrito de botanas, charcutería, fruta picada y postres para tus invitados.
+                    </p>
+                </div>
+
+                <div onclick="cambiarFondoHero('banos'); document.getElementById('galeria').scrollIntoView({behavior:'smooth'});" class="cursor-pointer bg-jardin-700/70 hover:bg-jardin-700 p-7 rounded-3xl border border-white/10 transition">
+                    <div class="w-12 h-12 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-restroom"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Baños Independientes y Acceso</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Sanitarios para damas y caballeros con fachada en ladrillo, columnas, lavamanos exterior con espejo y portón privado en Calle Quirio #441.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         5. HORARIO SEMANA COMPLETA (15-23 HRS) Y GOOGLE MAPS REAL
+    ====================================================================== -->
+    <section id="horarios-ubicacion" class="py-20 bg-jardin-50 border-y border-jardin-200/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                
+                <!-- Columna Izquierda: Horario Oficial Semana Completa (5 columnas) -->
+                <div class="lg:col-span-5 bg-jardin-800 text-white rounded-3xl p-8 sm:p-10 shadow-xl">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="px-3.5 py-1 rounded-full bg-gold-500/20 text-gold-400 text-xs font-bold uppercase tracking-wider">
+                            Semana Completa
+                        </span>
+                        <i class="fa-regular fa-clock text-3xl text-gold-400"></i>
+                    </div>
+
+                    <h3 class="text-3xl font-bold mb-2">Horario de Eventos</h3>
+                    <p class="text-gray-300 text-sm mb-6">
+                        Abrimos de <strong>Lunes a Domingo</strong> de 3:00 PM a 11:00 PM para que celebres entre semana o en fin de semana.
+                    </p>
+
+                    <div class="space-y-2.5 text-sm border-t border-b border-white/15 py-5">
+                        <div class="flex justify-between items-center py-1">
+                            <span class="text-gray-300"><i class="fa-solid fa-calendar-check text-gold-400 mr-2"></i>Lunes</span>
+                            <span class="font-bold bg-white/10 px-3 py-1 rounded-lg">15:00 – 23:00 hrs</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1">
+                            <span class="text-gray-300"><i class="fa-solid fa-calendar-check text-gold-400 mr-2"></i>Martes</span>
+                            <span class="font-bold bg-white/10 px-3 py-1 rounded-lg">15:00 – 23:00 hrs</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1">
+                            <span class="text-gray-300"><i class="fa-solid fa-calendar-check text-gold-400 mr-2"></i>Miércoles</span>
+                            <span class="font-bold bg-white/10 px-3 py-1 rounded-lg">15:00 – 23:00 hrs</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1">
+                            <span class="text-gray-300"><i class="fa-solid fa-calendar-check text-gold-400 mr-2"></i>Jueves</span>
+                            <span class="font-bold bg-white/10 px-3 py-1 rounded-lg">15:00 – 23:00 hrs</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1">
+                            <span class="text-gray-300"><i class="fa-solid fa-calendar-check text-gold-400 mr-2"></i>Viernes</span>
+                            <span class="font-bold text-gold-400 bg-gold-500/20 px-3 py-1 rounded-lg">15:00 – 23:00 hrs</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1">
+                            <span class="text-gray-300"><i class="fa-solid fa-calendar-check text-gold-400 mr-2"></i>Sábado</span>
+                            <span class="font-bold text-gold-400 bg-gold-500/20 px-3 py-1 rounded-lg">15:00 – 23:00 hrs</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1">
+                            <span class="text-gray-300"><i class="fa-solid fa-calendar-check text-gold-400 mr-2"></i>Domingo</span>
+                            <span class="font-bold text-gold-400 bg-gold-500/20 px-3 py-1 rounded-lg">15:00 – 23:00 hrs</span>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta con foto de la Entrada (Entrada.jpeg) -->
+                    <div class="mt-6 bg-white/5 rounded-2xl p-3.5 border border-white/10 flex items-center gap-4">
+                        <img 
+                            src="Entrada.jpeg" 
+                            data-filename="Entrada.jpeg"
+                            data-fallback="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80"
+                            onerror="manejarErrorImagen(this)"
+                            alt="Fachada Calle Quirio 441" 
+                            class="w-20 h-16 rounded-xl object-cover shrink-0 border border-gold-400/40"
+                        >
+                        <div class="text-xs">
+                            <p class="font-bold text-gold-400">Fachada / Acceso Principal</p>
+                            <p class="text-gray-300 mt-0.5">Calle Quirio #441. Portón café con teja y acceso controlado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Mapa de Google Maps Interactivo Real (7 columnas) -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-[0.2em] text-jardin-500 bg-jardin-100 px-3.5 py-1.5 rounded-full">Ubicación y Contacto</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-jardin-800 mt-4">Cómo llegar a Salón Jardín</h2>
+                    </div>
+
+                    <!-- Tarjetas de Propietario y Teléfono -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white p-5 rounded-2xl border border-jardin-200/80 shadow-sm flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-jardin-100 text-jardin-700 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-wider text-gray-400 font-semibold">Propietario / Atención</p>
+                                <p id="display-owner" class="text-base font-bold text-jardin-800 mt-0.5">Administración Salón Jardín</p>
+                                <button onclick="toggleConfigModal()" class="text-xs text-gold-600 font-semibold hover:underline mt-1">Editar nombre →</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-jardin-200/80 shadow-sm flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-gold-100 text-gold-600 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-wider text-gray-400 font-semibold">WhatsApp / Informes</p>
+                                <p id="display-phone" class="text-base font-bold text-jardin-800 mt-0.5">+52 (443) 000 0000</p>
+                                <a href="#cotizar" class="text-xs text-jardin-600 font-semibold hover:underline mt-1 inline-block">Enviar mensaje →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contenedor de Dirección + IFRAME REAL DE GOOGLE MAPS -->
+                    <div class="bg-white rounded-3xl border border-jardin-200/80 shadow-md overflow-hidden">
+                        <div class="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100">
+                            <div class="flex items-start gap-3.5">
+                                <div class="w-11 h-11 rounded-xl bg-jardin-700 text-gold-400 flex items-center justify-center text-lg shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs uppercase tracking-wider text-gray-400 font-semibold">Dirección Oficial</span>
+                                    <h4 id="display-address" class="text-lg font-bold text-jardin-800">Calle Quirio #441</h4>
+                                    <p id="display-reference" class="text-xs text-gray-500">Abierto de Lunes a Domingo de 15:00 a 23:00 hrs</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="copiarDireccion()" class="px-3.5 py-2.5 rounded-xl bg-jardin-50 hover:bg-jardin-100 text-jardin-700 font-semibold text-xs flex items-center gap-1.5 transition">
+                                    <i class="fa-regular fa-copy"></i>
+                                    <span>Copiar</span>
+                                </button>
+                                <a id="display-map-link" href="https://www.google.com/maps/search/?api=1&query=Calle+Quirio+441" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-jardin-700 hover:bg-jardin-600 text-white font-semibold text-xs flex items-center gap-1.5 shadow-sm transition">
+                                    <i class="fa-solid fa-diamond-turn-right text-gold-400"></i>
+                                    <span>Abrir en Google Maps</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Mapa Interactivo de Google Maps Embebido -->
+                        <div class="relative w-full h-80 bg-jardin-100">
+                            <iframe 
+                                id="google-maps-iframe"
+                                title="Mapa de ubicación Salón de Eventos Jardín en Calle Quirio 441"
+                                src="https://maps.google.com/maps?q=Calle%20Quirio%20441&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                                class="w-full h-full border-0"
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         6. COTIZADOR DIRECTO POR WHATSAPP
+    ====================================================================== -->
+    <section id="cotizar" class="py-20 sm:py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-3xl shadow-xl border border-jardin-200/80 overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+                
+                <div class="lg:col-span-7 p-8 sm:p-10">
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-jardin-500">Aparta tu Fecha</span>
+                    <h2 class="text-3xl font-bold text-jardin-800 mt-2">Cotiza tu Evento en Jardín</h2>
+                    <p class="text-gray-600 text-sm mt-1 mb-6">
+                        Elige la fecha y envíanos un WhatsApp directo para confirmar disponibilidad.
+                    </p>
+
+                    <form id="quote-form" onsubmit="enviarCotizacionWhatsApp(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-1.5">Tu Nombre *</label>
+                                <input type="text" id="cliente-nombre" required placeholder="Ej. Laura Méndez" oninput="actualizarVistaPrevia()" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-jardin-600 outline-none text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-1.5">Tipo de Evento *</label>
+                                <select id="cliente-evento" onchange="actualizarVistaPrevia()" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-jardin-600 outline-none text-sm bg-white">
+                                    <option value="XV Años">XV Años</option>
+                                    <option value="Boda">Boda</option>
+                                    <option value="Cumpleaños / Fiesta Infantil">Cumpleaños / Fiesta Infantil</option>
+                                    <option value="Bautizo / Primera Comunión">Bautizo / Primera Comunión</option>
+                                    <option value="Graduación">Graduación</option>
+                                    <option value="Evento Familiar / Corporativo">Evento Familiar / Corporativo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-1.5">Fecha del Evento *</label>
+                                <input type="date" id="cliente-fecha" required onchange="actualizarVistaPrevia()" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-jardin-600 outline-none text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-1.5">
+                                    Invitados: <span id="invitados-badge" class="text-jardin-700 font-bold">100 personas</span>
+                                </label>
+                                <input type="range" id="cliente-invitados" min="30" max="250" step="10" value="100" oninput="actualizarVistaPrevia()" class="w-full accent-jardin-600 mt-2 cursor-pointer">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-1.5">Comentarios adicionales</label>
+                            <textarea id="cliente-notas" rows="2" placeholder="Ej. Me interesa ver el salón con el área de inflable y mesa de dulces..." oninput="actualizarVistaPrevia()" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-jardin-600 outline-none text-sm"></textarea>
+                        </div>
+
+                        <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                            <button type="submit" class="flex-1 py-4 px-6 rounded-xl bg-jardin-700 hover:bg-jardin-600 text-white font-bold text-sm shadow-lg transition flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-lg text-gold-400"></i>
+                                <span>Enviar por WhatsApp</span>
+                            </button>
+                            <button type="button" onclick="copiarMensajeCotizacion()" class="py-4 px-5 rounded-xl border border-jardin-200 hover:bg-jardin-50 text-jardin-800 font-semibold text-sm transition flex items-center justify-center gap-2">
+                                <i class="fa-regular fa-copy"></i>
+                                <span>Copiar</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="lg:col-span-5 bg-jardin-800 text-white p-8 sm:p-10 flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-gold-400 text-xs font-semibold mb-4">Vista Previa de tu Mensaje</span>
+                        <div class="bg-jardin-900/90 border border-white/10 rounded-2xl p-5 text-xs sm:text-sm text-gray-200 font-mono whitespace-pre-line leading-relaxed" id="whatsapp-preview"></div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/15 flex items-center justify-between text-xs text-gray-300">
+                        <span>Lunes a Domingo</span>
+                        <span class="text-gold-400 font-bold">15:00 a 23:00 hrs</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         7. FOOTER
+    ====================================================================== -->
+    <footer class="bg-jardin-900 text-gray-300 py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-jardin-700 text-gold-400 flex items-center justify-center">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div>
+                    <p class="text-white font-serif font-bold text-base">Salón de Eventos "Jardín"</p>
+                    <p id="footer-address" class="text-gray-400">Calle Quirio #441 • Lunes a Domingo de 15:00 a 23:00 hrs</p>
+                </div>
+            </div>
+            <p id="footer-owner" class="text-gray-400">Atención: Administración Salón Jardín</p>
+        </div>
+    </footer>
+
+    <!-- =====================================================================
+         MODAL LIGHTBOX (PANTALLA COMPLETA CON OPCIÓN DE PONER DE FONDO)
+    ====================================================================== -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
+        <button onclick="cerrarLightbox()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-xl flex items-center justify-center transition">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-4xl w-full text-center">
+            <img id="lightbox-img" src="" alt="Vista ampliada" class="max-h-[75vh] mx-auto rounded-2xl shadow-2xl object-contain bg-jardin-900">
+            <div class="mt-4 flex flex-col sm:flex-row items-center justify-between gap-4 max-w-2xl mx-auto bg-white/10 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/15">
+                <div class="text-left">
+                    <h4 id="lightbox-title" class="text-white font-serif text-xl font-bold"></h4>
+                    <p id="lightbox-desc" class="text-gray-300 text-xs mt-0.5"></p>
+                </div>
+                <button id="lightbox-set-bg" class="shrink-0 px-4 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-jardin-900 font-bold text-xs transition flex items-center gap-2">
+                    <i class="fa-solid fa-image"></i>
+                    <span>Usar como Fondo Principal</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         MODAL DE CONFIGURACIÓN DEL PROPIETARIO Y TELÉFONO
+    ====================================================================== -->
+    <div id="config-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-jardin-200">
+            <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-gold-600">Personalizar Datos</span>
+                    <h3 class="text-2xl font-bold text-jardin-800">Salón de Eventos "Jardín"</h3>
+                </div>
+                <button onclick="toggleConfigModal()" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form onsubmit="guardarConfiguracion(event)" class="space-y-4 mt-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-600 mb-1">Nombre del Propietario o Encargado</label>
+                    <input type="text" id="input-owner" placeholder="Ej. Sr. Juan Pérez" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-600 mb-1">WhatsApp para recibir cotizaciones</label>
+                    <input type="text" id="input-whatsapp" placeholder="Ej. 524431234567" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-600 mb-1">Dirección del Salón (Se actualiza en el Mapa)</label>
+                    <input type="text" id="input-address" placeholder="Calle Quirio #441" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm">
+                </div>
+                <div class="pt-3 flex justify-end gap-3">
+                    <button type="button" onclick="toggleConfigModal()" class="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 text-sm font-semibold">Cancelar</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-jardin-700 hover:bg-jardin-600 text-white text-sm font-semibold shadow-md">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         JAVASCRIPT PRINCIPAL: 34 FOTOS + DETECTOR INTELIGENTE DE EXTENSIONES
+    ====================================================================== -->
+    <script>
+        /* ===================================================================
+           1. DATOS DEL SALÓN
+        =================================================================== */
+        const DATOS_SALON = {
+            nombreSalon: 'Salón de Eventos "Jardín"',
+            horario: 'Lunes a Domingo de 15:00 a 23:00 hrs',
+            propietario: 'Administración Salón Jardín',
+            telefonoVisible: '+52 (443) 000 0000',
+            whatsappNumero: '524430000000',
+            direccion: 'Calle Quirio #441',
+            referencia: 'Horario semana completa de 15:00 a 23:00 hrs'
+        };
+
+        // Almacén en memoria para cuando el usuario selecciona sus fotos desde su PC
+        const FOTOS_LOCALES_MEMORIA = {};
+
+        /* ===================================================================
+           2. CATÁLOGO COMPLETO DE LAS 34 IMÁGENES POR CATEGORÍA
+              (Incluye respaldos visuales por si aún no están en la misma carpeta)
+        =================================================================== */
+        const RESPALDOS_CATEGORIA = {
+            'techada': 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=80',
+            'aire-libre': 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1000&q=80',
+            'juegos': 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1000&q=80',
+            'dulces': 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1000&q=80',
+            'cocina': 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1000&q=80',
+            'banos': 'https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1000&q=80'
+        };
+
+        const GALERIA_FOTOS = [
+            // --- 1. PARTE TECHADA Y ARREGLOS DE MESAS (18 fotos) ---
+            { archivo: 'Portada.jpeg', categoria: 'techada', etiqueta: 'Foto Principal', titulo: 'Arreglos Florales y Camino Dorado en Mesas', descripcion: 'Montaje de gala con floreros altos de cristal, platos base dorados y servilletas color vino.' },
+            { archivo: '20.jpeg', categoria: 'techada', etiqueta: 'Parte Techada', titulo: 'Salón Techado con Arreglos en las Mesas', descripcion: 'Vista del montaje floral en mesas con el arco de globos y moño rosa al fondo.' },
+            { archivo: '26.jpeg', categoria: 'techada', etiqueta: 'Parte Techada', titulo: 'Mesa Imperial con Centro Floral y Globos', descripcion: 'Perspectiva frontal del montaje de gala con copas, botanas y decoración.' },
+            { archivo: '23.jpeg', categoria: 'techada', etiqueta: 'Parte Techada', titulo: 'Detalle de Arreglo Floral y Barra al Fondo', descripcion: 'Vista completa de las mesas vestidas en dorado y vino junto al área de cocina.' },
+            { archivo: '18.jpeg', categoria: 'techada', etiqueta: 'Parte Techada', titulo: 'Montaje Elegante con Camino de Rosas Blancas', descripcion: 'Mesas con mantelería texturizada, servilletas grises y velas azules.' },
+            { archivo: '30.jpeg', categoria: 'techada', etiqueta: 'Parte Techada', titulo: 'Mesa de Invitados frente a Ventanales de Arco', descripcion: 'Montaje para 14 personas con sillas Tiffany blancas y luz natural.' },
+            { archivo: '11.jpeg', categoria: 'techada', etiqueta: 'Parte Techada', titulo: 'Amplia Capacidad en Área Techada', descripcion: 'Distribución de mesas de banquete con mesa de honor iluminada al fondo.' },
+            { archivo: '19.jpeg', categoria: 'techada', etiqueta: 'Parte Techada', titulo: 'Mesas en Terraza Techada Junto al Jardín', descripcion: 'Tus invitados disfrutan bajo techo con vista directa a los rosales y áreas verdes.' },
+            { archivo: '21.jpeg', categoria: 'techada', etiqueta: 'Parte Techada', titulo: 'Mesa de Bienvenida y Recuerdos', descripcion: 'Entrada al área techada con mesa vestida en dorado y salones montados.' },
+            { archivo: '22.jpeg', categoria: 'techada', etiqueta: 'Parte Techada', titulo: 'Panorámica del Salón con Series de Luces', descripcion: 'Iluminación cálida en todo el techo para lucir de tarde y de noche hasta las 23:00 hrs.' },
+            { archivo: '29.jpeg', categoria: 'techada', etiqueta: 'Mesa de Honor', titulo: 'Mesa Principal con Cortinaje Blanco', descripcion: 'Fondo elegante con paneles 3D y drapeado para los festejados.' },
+            { archivo: '31.jpeg', categoria: 'techada', etiqueta: 'Mesa de Honor', titulo: 'Mesa Media Luna para Festejados', descripcion: 'Espacio principal frente a muro decorativo 3D y series de luces.' },
+            { archivo: '10.jpeg', categoria: 'techada', etiqueta: 'Decoración', titulo: 'Set Fotográfico con Arco de Globos y Moño', descripcion: 'Espacio amplio bajo techo para colocar sets de fotos y cilindros.' },
+            { archivo: '8.jpeg', categoria: 'techada', etiqueta: 'Vista Mixta', titulo: 'Conexión entre Jardín y Salón Techado', descripcion: 'Vista desde el jardín hacia las columnas blancas del área techada.' },
+            { archivo: '25.jpeg', categoria: 'techada', etiqueta: 'Decoración', titulo: 'Detalle de Arco Orgánico de Globos', descripcion: 'Tonos rojo, rosa y dorado junto al área de mesas.' },
+            { archivo: '27.jpeg', categoria: 'techada', etiqueta: 'Parte Techada', titulo: 'Alineación de Mesas y Sillas Tiffany', descripcion: 'Mobiliario impecable listo para recibir a tus invitados.' },
+            { archivo: '28.jpeg', categoria: 'techada', etiqueta: 'Parte Techada', titulo: 'Vista Lateral hacia el Jardín desde las Mesas', descripcion: 'Frescura y comodidad en la terraza techada.' },
+            { archivo: '32.jpeg', categoria: 'techada', etiqueta: 'Parte Techada', titulo: 'Vajilla Cuadrada y Cristalería en Mesas', descripcion: 'Cuidado en cada detalle del montaje.' },
+
+            // --- 2. AL AIRE LIBRE / SIN TECHAR (5 fotos) ---
+            { archivo: '9.jpeg', categoria: 'aire-libre', etiqueta: 'Al Aire Libre', titulo: 'Sala Lounge en Patio Soleado con Muro Verde', descripcion: 'Sillones modulares blancos rodeados de enredaderas naturales al aire libre.' },
+            { archivo: '24.jpeg', categoria: 'aire-libre', etiqueta: 'Al Aire Libre', titulo: 'Vista Superior del Patio Exterior Montado', descripcion: 'Mesas al aire libre con caminos dorados y sala lounge hexagonal al centro.' },
+            { archivo: '12.jpg', categoria: 'aire-libre', etiqueta: 'Al Aire Libre', titulo: 'Jardinera Natural y Área Exterior', descripcion: 'Palma natural y césped que conectan el patio con la terraza.' },
+            { archivo: '14.jpeg', categoria: 'aire-libre', etiqueta: 'Al Aire Libre', titulo: 'Sala Lounge Modular con Mesas de Centro', descripcion: 'Espacio cómodo al aire libre para platicar y disfrutar la tarde.' },
+            { archivo: '4.jpeg', categoria: 'aire-libre', etiqueta: 'Al Aire Libre', titulo: 'Explanada Exterior Adoquinada', descripcion: 'Amplio patio sin techar con jardineras y juegos al fondo.' },
+
+            // --- 3. ÁREA DE INFLABLE Y COLUMPIOS (4 fotos) ---
+            { archivo: '1.jpeg', categoria: 'juegos', etiqueta: 'Inflable y Niños', titulo: 'Castillo Inflable y Mesitas Infantiles', descripcion: 'Gran inflable de doble resbaladilla junto al área de mesas para niños.' },
+            { archivo: '2.jpeg', categoria: 'juegos', etiqueta: 'Inflable', titulo: 'Brincolín Inflable tipo Castillo', descripcion: 'Diversión segura para los pequeños durante todo el evento.' },
+            { archivo: '7.jpeg', categoria: 'juegos', etiqueta: 'Juegos y Columpios', titulo: 'Futbolito,Dos Módulos de Columpios y Resbaladillas', descripcion: 'Zona recreativa completa para niños y jóvenes.' },
+            { archivo: '4.jpeg', categoria: 'juegos', etiqueta: 'Columpios', titulo: 'Área de Columpios, Resbaladilla y Casita Escaladora', descripcion: 'Espacio amplio y seguro al aire libre para los niños.' },
+
+            // --- 4. MESA DE DULCES Y BOTANAS (3 fotos) ---
+            { archivo: '15.jpeg', categoria: 'dulces', etiqueta: 'Mesa de Dulces', titulo: 'Escalera de Dulces, Fruta y Botanas', descripcion: 'Montaje con vasos de dulces, sandía, charcutería y salsas.' },
+            { archivo: '16.jpeg', categoria: 'dulces', etiqueta: 'Mesa de Botanas', titulo: 'Carrito de Botanas y Exhibidor de Postres', descripcion: 'Presentación impecable para consentir a tus invitados.' },
+            { archivo: '17.jpeg', categoria: 'dulces', etiqueta: 'Mesa de Dulces', titulo: 'Vista Completa de la Barra de Botanas y Quesos', descripcion: 'Amplio espacio para colocar mesas de postres y snacks.' },
+
+            // --- 5. COCINA PEQUEÑA Y BARRA (2 fotos) ---
+            { archivo: '6.jpeg', categoria: 'cocina', etiqueta: 'Cocina y Barra', titulo: 'Barra con Acabado en Piedra, Refrigerador y Enfriador', descripcion: 'Equipada con tarja, parrilla, refrigerador, enfriador Pepsi y dulceros.' },
+            { archivo: '5.jpeg', categoria: 'cocina', etiqueta: 'Cocina Pequeña', titulo: 'Interior de la Cocina con Tarja y Parrilla', descripcion: 'Espacio práctico con barra en U y ventanal de arco.' },
+
+            // --- 6. BAÑOS Y ENTRADA (3 fotos) ---
+            { archivo: '13.jpeg', categoria: 'banos', etiqueta: 'Baños', titulo: 'Sanitarios Independientes con Lavabo Exterior', descripcion: 'Fachada en ladrillo con columnas, espejo, lavamanos y vegetación.' },
+            { archivo: '3.jpeg', categoria: 'banos', etiqueta: 'Baños', titulo: 'Vista del Área de Sanitarios desde el Jardín', descripcion: 'Cómodos baños para damas y caballeros integrados al diseño del jardín.' },
+            { archivo: 'Entrada.jpeg', categoria: 'banos', etiqueta: 'Fachada / Entrada', titulo: 'Entrada Principal en Calle Quirio #441', descripcion: 'Fachada exterior con portón amplio y fácil acceso.' }
+        ];
+
+        const FONDOS_HERO_POR_CATEGORIA = {
+            'techada': { archivo: 'Portada.jpeg', subtitulo: 'Parte Techada y Mesas: Arreglos florales de gala, caminos dorados, servilletas color vino y series de luces.' },
+            'aire-libre': { archivo: '9.jpeg', subtitulo: 'Área al Aire Libre (Sin Techar): Patio adoquinado rodeado de muros verdes naturales y sala lounge blanca.' },
+            'juegos': { archivo: '1.jpeg', subtitulo: 'Área Infantil: Castillo inflable de doble resbaladilla, columpios, casita escaladora, futbolito y mesitas para niños.' },
+            'dulces': { archivo: '16.jpeg', subtitulo: 'Mesa de Dulces y Botanas: Carrito blanco, escalera exhibidora, fruta fresca y charcutería.' },
+            'cocina': { archivo: '6.jpeg', subtitulo: 'Cocina Pequeña y Barra: Tarja de acero inoxidable, parrilla de quemadores, refrigerador y barra de servicio.' },
+            'banos': { archivo: '13.jpeg', subtitulo: 'Sanitarios y Entrada: Baños impecables con lavamanos exterior y acceso seguro en Calle Quirio #441.' }
+        };
+
+        /* ===================================================================
+           3. RESOLUCIÓN AUTOMÁTICA DE IMÁGENES (PRUEBA VARIAS EXTENSIONES
+              Y NUNCA DEJA UNA IMAGEN ROTA O INVISIBLE)
+        =================================================================== */
+        function obtenerClaveBase(nombreArchivo) {
+            return (nombreArchivo || '').split('/').pop().split('.')[0].toLowerCase().trim();
+        }
+
+        function obtenerRutaImagen(nombreArchivo, categoria) {
+            const clave = obtenerClaveBase(nombreArchivo);
+            if (FOTOS_LOCALES_MEMORIA[clave]) {
+                return FOTOS_LOCALES_MEMORIA[clave];
+            }
+            return nombreArchivo;
+        }
+
+        function manejarErrorImagen(imgElement) {
+            const original = imgElement.getAttribute('data-filename') || '';
+            const clave = obtenerClaveBase(original);
+
+            // Si el usuario ya cargó las fotos con el botón, usar la de memoria
+            if (FOTOS_LOCALES_MEMORIA[clave]) {
+                imgElement.src = FOTOS_LOCALES_MEMORIA[clave];
+                return;
+            }
+
+            // Probar automáticamente variaciones de nombre (.jpg, .jpeg, minúsculas, carpeta img/)
+            const candidatos = [
+                `${clave}.jpeg`,
+                `${clave}.jpg`,
+                `${clave}.JPEG`,
+                `${clave}.JPG`,
+                original.toLowerCase(),
+                `img/${original}`,
+                `img/${clave}.jpeg`,
+                `img/${clave}.jpg`,
+                `imagenes/${original}`,
+                `fotos/${original}`
+            ];
+
+            let intento = parseInt(imgElement.getAttribute('data-try-index') || '0', 10);
+            if (intento < candidatos.length) {
+                imgElement.setAttribute('data-try-index', (intento + 1).toString());
+                imgElement.src = candidatos[intento];
+            } else {
+                // Si no encuentra el archivo local (por ejemplo en la vista previa web), mostrar respaldo elegante
+                imgElement.onerror = null;
+                imgElement.src = imgElement.getAttribute('data-fallback') || RESPALDOS_CATEGORIA['techada'];
+            }
+        }
+
+        // Permite al usuario seleccionar las 34 fotos desde su PC y verlas al instante
+        function procesarFotosLocales(event) {
+            const archivos = Array.from(event.target.files || []);
+            if (!archivos.length) return;
+
+            let contador = 0;
+            archivos.forEach(file => {
+                const clave = obtenerClaveBase(file.name);
+                FOTOS_LOCALES_MEMORIA[clave] = URL.createObjectURL(file);
+                contador++;
+            });
+
+            // Actualizar todas las imágenes en pantalla
+            document.querySelectorAll('img[data-filename]').forEach(img => {
+                const clave = obtenerClaveBase(img.getAttribute('data-filename'));
+                if (FOTOS_LOCALES_MEMORIA[clave]) {
+                    img.src = FOTOS_LOCALES_MEMORIA[clave];
+                }
+            });
+
+            filtrarGaleria(categoriaActualGaleria);
+            document.getElementById('btn-cargar-texto').textContent = `¡${contador} Fotos Cargadas!`;
+            const banner = document.getElementById('local-loader-banner');
+            if (banner) banner.classList.add('hidden');
+            mostrarNotificacion('¡Tus Fotos Reales están Activas!', `Se vincularon ${contador} fotografías directamente desde tu carpeta.`);
+        }
+
+        /* ===================================================================
+           4. FUNCIONES DE GALERÍA Y CAMBIO DE FONDO PRINCIPAL
+        =================================================================== */
+        let categoriaActualGaleria = 'todos';
+
+        function cambiarFondoHero(categoria) {
+            const config = FONDOS_HERO_POR_CATEGORIA[categoria] || FONDOS_HERO_POR_CATEGORIA['techada'];
+            const heroImg = document.getElementById('hero-bg-img');
+            heroImg.setAttribute('data-filename', config.archivo);
+            heroImg.setAttribute('data-try-index', '0');
+            heroImg.setAttribute('data-fallback', RESPALDOS_CATEGORIA[categoria] || RESPALDOS_CATEGORIA['techada']);
+            heroImg.onerror = function() { manejarErrorImagen(this); };
+            heroImg.src = obtenerRutaImagen(config.archivo, categoria);
+
+            document.getElementById('hero-subtitle').textContent = config.subtitulo;
+
+            document.querySelectorAll('.hero-cat-btn').forEach(btn => {
+                btn.className = 'hero-cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/15 hover:bg-white/25 text-white transition flex items-center gap-1.5';
+            });
+            const activeBtn = document.getElementById('hero-btn-' + categoria);
+            if (activeBtn) {
+                activeBtn.className = 'hero-cat-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-gold-500 text-jardin-900 shadow-md transition flex items-center gap-1.5';
+            }
+
+            filtrarGaleria(categoria);
+        }
+
+        function usarFotoEspecificaEnHero(foto) {
+            const heroImg = document.getElementById('hero-bg-img');
+            heroImg.setAttribute('data-filename', foto.archivo);
+            heroImg.setAttribute('data-try-index', '0');
+            heroImg.setAttribute('data-fallback', RESPALDOS_CATEGORIA[foto.categoria] || RESPALDOS_CATEGORIA['techada']);
+            heroImg.onerror = function() { manejarErrorImagen(this); };
+            heroImg.src = obtenerRutaImagen(foto.archivo, foto.categoria);
+            document.getElementById('hero-subtitle').textContent = `${foto.titulo} — ${foto.descripcion}`;
+            cerrarLightbox();
+            document.getElementById('inicio').scrollIntoView({ behavior: 'smooth' });
+            mostrarNotificacion('Fondo Principal Actualizado', `Ahora se muestra "${foto.titulo}" en la portada.`);
+        }
+
+        function filtrarGaleria(categoriaSeleccionada) {
+            categoriaActualGaleria = categoriaSeleccionada;
+            const grid = document.getElementById('gallery-grid');
+            grid.innerHTML = '';
+
+            document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
+                btn.className = 'gallery-filter-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold bg-white text-gray-700 hover:bg-jardin-100 border border-jardin-200 transition flex items-center gap-2';
+            });
+            const activeBtn = document.getElementById('filter-' + categoriaSeleccionada);
+            if (activeBtn) {
+                activeBtn.className = 'gallery-filter-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold bg-jardin-700 text-white shadow-md transition flex items-center gap-2';
+            }
+
+            const fotosFiltradas = categoriaSeleccionada === 'todos'
+                ? GALERIA_FOTOS
+                : GALERIA_FOTOS.filter(f => f.categoria === categoriaSeleccionada);
+
+            fotosFiltradas.forEach(foto => {
+                const fallbackUrl = RESPALDOS_CATEGORIA[foto.categoria] || RESPALDOS_CATEGORIA['techada'];
+                const srcInicial = obtenerRutaImagen(foto.archivo, foto.categoria);
+
+                const card = document.createElement('div');
+                card.className = 'group relative rounded-3xl overflow-hidden shadow-sm border border-jardin-200/80 bg-white cursor-pointer card-hover flex flex-col justify-between';
+                card.onclick = () => abrirLightbox(foto);
+
+                card.innerHTML = `
+                    <div class="relative aspect-[4/3] overflow-hidden bg-jardin-900">
+                        <img 
+                            src="${srcInicial}" 
+                            data-filename="${foto.archivo}"
+                            data-fallback="${fallbackUrl}"
+                            onerror="manejarErrorImagen(this)"
+                            alt="${foto.titulo}" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                        >
+                        <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/65 backdrop-blur-md text-gold-400 text-[11px] font-bold">
+                            ${foto.etiqueta}
+                        </div>
+                        <div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-lg bg-black/60 text-white text-[10px] font-mono">
+                            ${foto.archivo}
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-base text-jardin-800 group-hover:text-jardin-600 transition">${foto.titulo}</h3>
+                        <p class="text-xs text-gray-500 mt-1 leading-relaxed">${foto.descripcion}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function abrirLightbox(foto) {
+            const lbImg = document.getElementById('lightbox-img');
+            lbImg.setAttribute('data-filename', foto.archivo);
+            lbImg.setAttribute('data-try-index', '0');
+            lbImg.setAttribute('data-fallback', RESPALDOS_CATEGORIA[foto.categoria] || RESPALDOS_CATEGORIA['techada']);
+            lbImg.onerror = function() { manejarErrorImagen(this); };
+            lbImg.src = obtenerRutaImagen(foto.archivo, foto.categoria);
+
+            document.getElementById('lightbox-title').textContent = foto.titulo;
+            document.getElementById('lightbox-desc').textContent = `${foto.descripcion} (${foto.archivo})`;
+            document.getElementById('lightbox-set-bg').onclick = () => usarFotoEspecificaEnHero(foto);
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        }
+
+        function cerrarLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        }
+
+        /* ===================================================================
+           5. COTIZADOR WHATSAPP Y CONFIGURACIÓN
+        =================================================================== */
+        function mostrarNotificacion(titulo, mensaje) {
+            const toast = document.getElementById('toast-notification');
+            document.getElementById('toast-title').textContent = titulo;
+            document.getElementById('toast-message').textContent = mensaje;
+            toast.classList.remove('hidden', 'translate-y-4', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => toast.classList.add('hidden'), 300);
+            }, 3500);
+        }
+
+        function aplicarDatosEnPantalla() {
+            document.getElementById('display-owner').textContent = DATOS_SALON.propietario;
+            document.getElementById('footer-owner').textContent = 'Atención: ' + DATOS_SALON.propietario;
+            document.getElementById('display-phone').textContent = DATOS_SALON.telefonoVisible;
+            document.getElementById('display-address').textContent = DATOS_SALON.direccion;
+            document.getElementById('footer-address').textContent = `${DATOS_SALON.direccion} • Lunes a Domingo de 15:00 a 23:00 hrs`;
+
+            const queryMapa = encodeURIComponent(DATOS_SALON.direccion);
+            document.getElementById('display-map-link').href = `https://www.google.com/maps/search/?api=1&query=${queryMapa}`;
+            document.getElementById('google-maps-iframe').src = `https://maps.google.com/maps?q=${queryMapa}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+
+            actualizarVistaPrevia();
+        }
+
+        function obtenerTextoCotizacion() {
+            const nombre = document.getElementById('cliente-nombre').value.trim() || '[Tu Nombre]';
+            const evento = document.getElementById('cliente-evento').value;
+            const fecha = document.getElementById('cliente-fecha').value || '[Fecha por definir]';
+            const invitados = document.getElementById('cliente-invitados').value;
+            const notas = document.getElementById('cliente-notas').value.trim();
+
+            document.getElementById('invitados-badge').textContent = `${invitados} personas`;
+
+            let mensaje = `¡Hola! 👋 Me interesa cotizar un evento en el *Salón de Eventos "Jardín"* (${DATOS_SALON.direccion}).\n\n`;
+            mensaje += `• *Nombre:* ${nombre}\n`;
+            mensaje += `• *Evento:* ${evento}\n`;
+            mensaje += `• *Fecha:* ${fecha}\n`;
+            mensaje += `• *Invitados:* ${invitados} personas\n`;
+            mensaje += `• *Horario:* 15:00 a 23:00 hrs\n`;
+            if (notas) mensaje += `• *Comentarios:* ${notas}\n`;
+            mensaje += `\n¿Tienen disponibilidad para esa fecha?`;
+            return mensaje;
+        }
+
+        function actualizarVistaPrevia() {
+            document.getElementById('whatsapp-preview').textContent = obtenerTextoCotizacion();
+        }
+
+        function enviarCotizacionWhatsApp(e) {
+            e.preventDefault();
+            const texto = encodeURIComponent(obtenerTextoCotizacion());
+            const numeroLimpio = DATOS_SALON.whatsappNumero.replace(/\D/g, '');
+            window.open(`https://wa.me/${numeroLimpio}?text=${texto}`, '_blank');
+        }
+
+        function copiarTextoAlPortapapeles(texto, mensajeExito) {
+            const textArea = document.createElement('textarea');
+            textArea.value = texto;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-9999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                mostrarNotificacion('¡Copiado!', mensajeExito);
+            } catch (err) {
+                mostrarNotificacion('Aviso', 'Copia el texto manualmente.');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function copiarMensajeCotizacion() {
+            copiarTextoAlPortapapeles(obtenerTextoCotizacion(), 'Mensaje de cotización copiado.');
+        }
+
+        function copiarDireccion() {
+            copiarTextoAlPortapapeles(DATOS_SALON.direccion, `Dirección copiada: ${DATOS_SALON.direccion}`);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            menu.classList.toggle('hidden');
+            icon.className = menu.classList.contains('hidden') ? 'fa-solid fa-bars text-xl' : 'fa-solid fa-xmark text-xl';
+        }
+
+        function toggleConfigModal() {
+            const modal = document.getElementById('config-modal');
+            if (modal.classList.contains('hidden')) {
+                document.getElementById('input-owner').value = DATOS_SALON.propietario;
+                document.getElementById('input-whatsapp').value = DATOS_SALON.whatsappNumero;
+                document.getElementById('input-address').value = DATOS_SALON.direccion;
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function guardarConfiguracion(e) {
+            e.preventDefault();
+            const nuevoOwner = document.getElementById('input-owner').value.trim();
+            const nuevoWhatsapp = document.getElementById('input-whatsapp').value.trim();
+            const nuevaDireccion = document.getElementById('input-address').value.trim();
+
+            if (nuevoOwner) DATOS_SALON.propietario = nuevoOwner;
+            if (nuevoWhatsapp) {
+                DATOS_SALON.whatsappNumero = nuevoWhatsapp.replace(/\D/g, '');
+                DATOS_SALON.telefonoVisible = '+' + DATOS_SALON.whatsappNumero;
+            }
+            if (nuevaDireccion) DATOS_SALON.direccion = nuevaDireccion;
+
+            aplicarDatosEnPantalla();
+            toggleConfigModal();
+            mostrarNotificacion('¡Datos Actualizados!', 'El mapa y los datos de contacto se actualizaron.');
+        }
+
+        window.onload = function() {
+            aplicarDatosEnPantalla();
+            filtrarGaleria('todos');
+        };
+    </script>
+</body>
+</html>
